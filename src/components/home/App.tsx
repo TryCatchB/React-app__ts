@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import ProductsPage from "../productsPage/ProductsPage";
+import AboutPage from "../aboutPage/AboutPage";
+import Navigate from "./navigate/Navigate";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="container">
-      <h1 className="text-red-500">{count}</h1>
-      <button onClick={() => setCount((prev) => prev + 1)}>Click me</button>
-    </div>
+    <>
+      <Navigate />
+      <Routes>
+        <Route path="/" element={<ProductsPage />} />
+        <Route path="/about" element={<AboutPage />} />
+      </Routes>
+    </>
   );
 }
 
