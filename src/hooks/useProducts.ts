@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { IProduct } from "../model";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
+import Service from "../services/service";
 
 export const useProducts = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -15,10 +16,8 @@ export const useProducts = () => {
     try {
       setError("");
       setLoading(true);
-      const response = await axios.get<IProduct[]>(
-        "https://fakestoreapi.com/products?limit=5"
-      );
-      setProducts(response.data);
+      const data = await Service.getAll("https://fakestoreapi.com/products", 5);
+      setProducts(data);
       setLoading(false);
     } catch (error: unknown) {
       const e = error as AxiosError;

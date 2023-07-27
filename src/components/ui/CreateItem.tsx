@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IProduct } from "../../model";
-import axios from "axios";
 import Error from "./Error";
+import Service from "../../services/service";
 
 const productData: IProduct = {
   title: "",
@@ -33,12 +33,12 @@ const CreateItem = ({ onCreate }: CreateProductProps) => {
     }
 
     productData.title = value;
-    const response = await axios.post<IProduct>(
+    const data = await Service.setItem(
       "https://fakestoreapi.com/products",
       productData
     );
 
-    onCreate(response.data);
+    onCreate(data);
   };
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
